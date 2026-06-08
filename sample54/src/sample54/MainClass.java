@@ -136,5 +136,52 @@ public class MainClass {
 		dataMap.put("학생", "홍길동");
 		dataMap.put("번호", 1001);
 		dataMap.put("내용	", list);
+		
+		Map<Integer, String> map = new HashMap<Integer, String>();
+		// CRUD
+		map.put(3, "김혜성");
+		map.put(52, "박병호");
+		map.put(51, "이정후");
+		map.put(7, "김하성");
+		map.put(14, "서건창");
+		
+		System.out.println("map의 크기: "+ map.size());
+		System.out.println(map.get(3));
+		
+		Iterator<Integer> iterator = map.keySet().iterator();
+		while(iterator.hasNext()) {
+			int key = iterator.next();
+			String value = map.get(key);
+			System.out.println("key: "+key+" value: "+value);
+		}
+		
+		_value = map.remove(52);
+		System.out.println("삭제된 데이터: "+_value);
+		
+		b = map.containsKey(3);
+		System.out.println(b);
+		
+		if(map.containsKey(51)) {
+			String value = map.get(51); 
+			System.out.println(value);
+		}
+		
+		map.replace(3, "김별삼");
+		System.out.println(map.get(3));
+		
+		TreeMap<Integer, String> tree = new TreeMap<Integer, String>(map);
+		Iterator<Integer> iit = tree.keySet().iterator();
+		while(iit.hasNext()) {
+			int key = iit.next();
+			String value = tree.get(key);
+			System.out.println("key: "+key+" value: "+value);
+		}
+		
+		Iterator<Integer> itt = tree.descendingKeySet().iterator();
+		while(itt.hasNext()) {
+			int key = itt.next();
+			String value = tree.get(key);
+			System.out.println("key: "+key+" value: "+value);
+		}
 	}
 }

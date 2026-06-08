@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import com.mbc.addr.dto.AddressBookDTO;
 import com.mbc.addr.file.FileProc;
+import com.mbc.addr.singleton.SingletonClass;
 
 public class AddressBookDAO implements AddressBookInterface{
 	// 인터페이스를 연결합니다....
@@ -15,15 +16,20 @@ public class AddressBookDAO implements AddressBookInterface{
 	Scanner sc = new Scanner(System.in);
 	FileProc fp;
 	
-	// 리스트를 만들어줍니다
-	private List<AddressBookDTO> list;
+	// singleton 만들기
+	private static AddressBookDAO ad = new AddressBookDAO();
 	
 	// DAO를 불러오면~ 파일 프로세서로 파일을 불러오게 해주고
-	public AddressBookDAO() {
+	private AddressBookDAO() {
 		fp = new FileProc("addressBook");
 		load();	
 	}
 	
+	public static AddressBookDAO getInstance() {
+		return ad;
+	}
+	SingletonClass st = SingletonClass.getInstance();
+	List<AddressBookDTO> list = st.list;
 	
 	// search 이거 내수용 함수를 만듭니다
 	// 찾아서 리스트로 반환
@@ -307,7 +313,6 @@ public class AddressBookDAO implements AddressBookInterface{
 			System.out.println("수정 프로그램을 취소합니다.");
 			break;
 		}
-		
 	}
 
 	@Override
@@ -334,7 +339,7 @@ public class AddressBookDAO implements AddressBookInterface{
 	
 	@Override
 	public void load() {
-		list = new ArrayList<AddressBookDTO>();
+		list.clear();
 		
 		List<String> strList = fp.load();
 		for(int i=0;i<strList.size();i++) {
