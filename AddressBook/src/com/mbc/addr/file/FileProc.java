@@ -89,11 +89,3 @@ public class FileProc {
 //		return array;
 	}
 }
-
-
-
-
-
-
-
-
