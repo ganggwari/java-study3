@@ -1,0 +1,33 @@
+package com.mbc.jdbc.database;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+// 언제든지 호출 가능
+public class DBConnection {
+
+	public static void initConnection() {
+		try {
+			Class.forName("org.postgresql.Driver");
+			
+			System.out.println("Driver Loading Success");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Driver Loading Fail");
+		}
+	}
+	
+	public static Connection getConnection() {
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "1234");
+			
+			System.out.println("PostgreSQL Connection Success");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return conn;
+	}
+
+}
